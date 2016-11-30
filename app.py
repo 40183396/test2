@@ -2,15 +2,20 @@ from flask import Flask, render_template, request, \
       redirect, url_for, session, flash, g
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
+#from flask.ext.bcrypt import Bcrypt
 #import sqlite3
 #import sqlalchemy
 
+# creates app object
 app = Flask(__name__)
+#bcrypt = Bcrypt(app)
 
-app.secret_key = "-my-secret-key"
+#app.secret_key = "-my-secret-key"
 #app.database = "sample.db"
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///posts.db'
+#app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///posts.db'
 
+# config
+app.config.from_object('config.DevelopmentConfig')
 db = SQLAlchemy(app)
 
 from models import *
@@ -64,4 +69,4 @@ def logout():
  #   return sqlite3.connect(app.database)
 
 if __name__ == '__main__':
-      app.run(host='0.0.0.0', debug=True)
+      app.run(host='0.0.0.0')
